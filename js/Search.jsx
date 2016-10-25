@@ -2,7 +2,7 @@ import React from 'react'
 import data from '../public/data'
 import ShowCard from './ShowCard'
 
-export default class Search extends React.Component {
+class Search extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -36,3 +36,5 @@ export default class Search extends React.Component {
     )
   }
 }
+
+module.exports = Search

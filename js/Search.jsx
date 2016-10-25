@@ -1,6 +1,6 @@
 import React from 'react'
-import data from '../public/data'
 import ShowCard from './ShowCard'
+import Header from './Header'
 
 class Search extends React.Component {
   constructor (props) {
@@ -8,25 +8,23 @@ class Search extends React.Component {
     this.state = {
       searchTerm: ''
     }
-    this.handleSearchTermEvent = this.handleSearchTermEvent.bind(this)
+    this.handleSearchTermChange = this.handleSearchTermChange.bind(this)
   }
 
-  handleSearchTermEvent (event) {
-    this.setState({searchTerm: event.target.value})
+  handleSearchTermChange (searchTerm) {
+    this.setState({searchTerm: searchTerm})
   }
 
   render () {
     return (
       <div className='container'>
-        <header className='header'>
-          <h1 className='brand'>svideo</h1>
-          <input onChange={this.handleSearchTermEvent}
-            value={this.state.searchTerm}
-            className='search-input'
-            type='text' placeholder='Search' />
-        </header>
+        <Header
+          showSearch
+          handleSearchTermChange={this.handleSearchTermChange}
+          searchTerm={this.state.searchTerm}
+        />
         <div className='shows'>
-          {data.shows.filter((show) =>
+          {this.props.route.shows.filter((show) =>
             `${show.title} ${show.description}`.toUpperCase().indexOf(this.state.searchTerm.toUpperCase()) >= 0)
             .map((show) => (
               <ShowCard {...show} key={show.imdbID} />
@@ -35,6 +33,10 @@ class Search extends React.Component {
       </div>
     )
   }
+}
+
+Search.propTypes = {
+  route: React.PropTypes.object
 }
 
 module.exports = Search

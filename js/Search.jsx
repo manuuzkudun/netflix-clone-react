@@ -1,6 +1,7 @@
 import React from 'react'
 import ShowCard from './ShowCard'
 import Header from './Header'
+import { connector } from './Store'
 
 class Search extends React.Component {
   constructor (props) {

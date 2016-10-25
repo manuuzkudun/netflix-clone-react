@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
+import { connector } from './Store'
 
 class Header extends React.Component {
   constructor (props) {
@@ -7,8 +8,8 @@ class Header extends React.Component {
     this.handleSearchTermEvent = this.handleSearchTermEvent.bind(this)
   }
 
-  handleSearchTermEvent (e) {
-    this.props.handleSearchTermChange(e.target.value)
+  handleSearchTermEvent (event) {
+    this.props.setSearchTerm(event.target.value)
   }
 
   render () {
@@ -42,8 +43,8 @@ class Header extends React.Component {
 
 Header.propTypes = {
   showSearch: React.PropTypes.bool,
-  handleSearchTermChange: React.PropTypes.func,
+  setSearchTerm: React.PropTypes.func,
   searchTerm: React.PropTypes.string
 }
 
-module.exports = Header
+module.exports = connector(Header)

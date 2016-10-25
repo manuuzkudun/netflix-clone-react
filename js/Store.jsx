@@ -1,4 +1,4 @@
-import { createStore } from 'redux'
+import { createStore, compose } from 'redux'
 import { connect } from 'react-redux'
 
 const SET_SEARCH_TERM = 'setSearchTerm'
@@ -21,7 +21,10 @@ const searchReducer = (state, action) => {
   return newState
 }
 
-const store = createStore(rootReducer)
+const store = createStore(rootReducer, initialState, compose(
+  typeof window === 'object' &&
+  typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : (f) => f
+))
 
 const mapStateToProps = (state) => {
   return { searchTerm: state.searchTerm }
@@ -37,4 +40,4 @@ const mapDispatchToProps = (dispatch) => {
 
 const connector = connect(mapStateToProps, mapDispatchToProps)
 
-module.exports = { connector, store }
+module.exports = { connector, store, rootReducer }

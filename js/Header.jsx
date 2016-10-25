@@ -5,18 +5,18 @@ import { connector } from './Store'
 class Header extends React.Component {
   constructor (props) {
     super(props)
-    this.handleSearchTermEvent = this.handleSearchTermEvent.bind(this)
+    this.handleSearchTermChange = this.handleSearchTermChange.bind(this)
   }
 
-  handleSearchTermEvent (event) {
-    this.props.setSearchTerm(event.target.value)
+  handleSearchTermChange (e) {
+    this.props.setSearchTerm(e.target.value)
   }
 
   render () {
     let utilSpace
     if (this.props.showSearch) {
       utilSpace = <input
-        onChange={this.handleSearchTermEvent}
+        onChange={this.handleSearchTermChange}
         value={this.props.searchTerm}
         className='search-input'
         type='text'
